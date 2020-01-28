@@ -1,30 +1,30 @@
-## ---- include = FALSE----------------------------------------------------
+## ---- include = FALSE---------------------------------------------------------
 knitr::opts_chunk$set(
   collapse=TRUE,
   comment="#"
 )
 
-## ----install, eval=FALSE-------------------------------------------------
+## ----install, eval=FALSE------------------------------------------------------
 #  install.packages("corto")
 
-## ----load----------------------------------------------------------------
+## ----load---------------------------------------------------------------------
 library(corto)
 
-## ----load1---------------------------------------------------------------
+## ----load1--------------------------------------------------------------------
 load(system.file("extdata","inmat.rda",package="corto"))
 inmat[1:5,1:5]
 
-## ----load2---------------------------------------------------------------
+## ----load2--------------------------------------------------------------------
 dim(inmat)
 
-## ----load3---------------------------------------------------------------
+## ----load3--------------------------------------------------------------------
 load(system.file("extdata","centroids.rda",package="corto"))
 centroids[15]
 
-## ----load4---------------------------------------------------------------
+## ----load4--------------------------------------------------------------------
 length(centroids)
 
-## ----runcorto,message=FALSE,results="hide"-------------------------------
+## ----runcorto,message=FALSE,results="hide"------------------------------------
 regulon<-corto(inmat,centroids=centroids,nbootstraps=10,p=1e-30,nthreads=2)
 # Input Matrix has 87 samples and 10021 features
 # Correlation Coefficient Threshold is: 0.889962633618839
@@ -37,16 +37,16 @@ regulon<-corto(inmat,centroids=centroids,nbootstraps=10,p=1e-30,nthreads=2)
 # Calculating edge likelihood
 # Generating regulon object
 
-## ----prinregulon---------------------------------------------------------
+## ----prinregulon--------------------------------------------------------------
 regulon[1:2]
 
-## ----prinregulon2--------------------------------------------------------
+## ----prinregulon2-------------------------------------------------------------
 length(regulon)
 
-## ----prinregulon3--------------------------------------------------------
+## ----prinregulon3-------------------------------------------------------------
 names(regulon)
 
-## ----runcnv, eval=FALSE--------------------------------------------------
+## ----runcnv, eval=FALSE-------------------------------------------------------
 #  load(system.file("extdata","cnvmat.rda",package="corto",mustWork=TRUE))
 #  regulon <- corto(inmat,centroids=centroids,nthreads=2,nbootstraps=10,verbose=TRUE,cnvmat=cnvmat,p=0.01)
 

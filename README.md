@@ -1,13 +1,31 @@
 # corto
-corto (Correlation Tool): an R package to generate correlation-based DPI networks
-![alt text](https://giorgilaborg.files.wordpress.com/2019/10/cortoicon.png)
+_corto_ (Correlation Tool): an R package to generate correlation-based DPI networks.
+
+To install the _corto_ stable version from CRAN:
+```{r install, eval=FALSE}
+install.packages("corto")
+```
+
+Alternatively, you can install the _corto_ developmental version directly from Github:
+```{r}
+library(devtools)
+install_github("federicogiorgi/corto")
+```
+
+![corto logo correlation tool](https://giorgilaborg.files.wordpress.com/2019/10/cortoicon.png)
+
+
+# Donation
+If you help us buying a cup of coffee, we will convert the caffeine into code improvements!
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=LQ9T3X5EAD4YY&currency_code=EUR&source=url)
 
 # Introduction
 The _corto_ ("correlation tool") package provides a pipeline to infer networks between "centroid" and "target" variables in a dataset, using a combination of Spearman correlation and Data Processing Inequality (DPI), first proposed in [1]. The main application of _corto_ is in the field of Bioinformatics and Transcriptomics, where co-occurrence between variables can be used as a mean to infer regulatory mechanisms [2] or gene functions [3]. In this field, usually the tested features are genes (or rather, their expression profile across samples), whereas the centroids are Transcription Factors (TFs) and their targets are Target Genes (TGs). The TF-TG co-expression can hint at a causal regulatory relationship, as proven in many studies [4,5,6]. The _corto_ tool replicates the well-established pipeline of the ARACNe family of tools [7,8,9]
 
 In brief, _corto_ operates using the following steps:
 
-1. Load an gene expression matrix and a list of user-provided centroids (e.g. TFs). In the case of RNA-Seq, VST-normalized data, as described in [10].
+1. Load a gene expression matrix and a list of user-provided centroids (e.g. TFs). Data should be normalized via Variance Stabilizing Transformation (VST) for RNA-Seq, and Robust Multiarray Average (RMA) for microarrays, as described in [10].
 2. Calculate all pairwise Spearman correlation coefficients between centroid and target features. The rank transformation operated by the Spearman correlation coefficient is a common procedure used in co-expression based studies, due to its benefits in reducing the effects of outliers [11].
 3. Filter out all centroid-target features whose correlation coefficient _absolute value_ is below the provided p-value threshold _p_.
 4. Apply DPI to all centroid-centroid-target triplets, in order to identify which centroid-target correlation is stronger and identify the most likely association (e.g. which TF is the most likely regulator of the TG in the dataset).
@@ -83,6 +101,9 @@ load(system.file("extdata","cnvmat.rda",package="corto",mustWork=TRUE))
 regulon <- corto(inmat,centroids=centroids,nthreads=2,nbootstraps=10,verbose=TRUE,cnvmat=cnvmat,p=0.01)
 ```
 
+
+
+
 # References
 [1] Reverter, Antonio, and Eva KF Chan. "Combining partial correlation and an information theory approach to the reversed engineering of gene co-expression networks." Bioinformatics 24.21 (2008): 2491-2497.
 
@@ -111,5 +132,5 @@ regulon <- corto(inmat,centroids=centroids,nthreads=2,nbootstraps=10,verbose=TRU
 
 [14] Gene Ontology Consortium. "The Gene Ontology (GO) database and informatics resource." Nucleic acids research 32.suppl_1 (2004): D258-D261.
 
-[15] Schubert, Michael, et al. "Gene networks in cancer are biased by aneuploidies and sample impurities." BioRxiv (2019): 752816.
+[15] Schubert, Michael, et al. "Gene networks in cancer are biased by aneuploidies and sample impurities." Biochimica et Biophisica Acata - Gene Regulatory Models (2019): 194444. DOI: https://doi.org/10.1016/j.bbagrm.2019.194444
 
