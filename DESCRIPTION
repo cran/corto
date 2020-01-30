@@ -1,7 +1,7 @@
 Package: corto
 Type: Package
 Title: Inference of Gene Regulatory Networks
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
  person("Federico M.","Giorgi",email = "federico.giorgi@gmail.com",role=c("aut","cre")),
  person("Daniele","Mercatelli",email = "danielemercatelli@gmail.com",role="ctb"),
@@ -29,9 +29,9 @@ NeedsCompilation: no
 Imports: dplyr, knitr, parallel, pbapply, plotrix, rmarkdown, stats,
         utils
 VignetteBuilder: knitr
-Packaged: 2020-01-28 19:22:00 UTC; Admin
+Packaged: 2020-01-30 11:44:22 UTC; Utente
 Author: Federico M. Giorgi [aut, cre],
   Daniele Mercatelli [ctb],
   Gonzalo Lopez-Garcia [ctb]
 Repository: CRAN
-Date/Publication: 2020-01-28 19:50:02 UTC
+Date/Publication: 2020-01-30 12:00:05 UTC
