@@ -1,4 +1,4 @@
-41cdb47c49b7d67b61757cff7675a336 *DESCRIPTION
+bc8217b190b19c94758417bc686e1857 *DESCRIPTION
 7762df5488283432d44f8178ab26655e *NAMESPACE
 e0286c10dead9d9a7beb486dcee9fadc *R/corto.R
 97e0e6593dbdde865f55a5805e91ec9e *R/functions.R
@@ -9,7 +9,7 @@ e0286c10dead9d9a7beb486dcee9fadc *R/corto.R
 b655af289b5096385311bfe249ecc21f *inst/CITATION
 0220fddf68b9eeb0e02e9258b6cae34e *inst/doc/corto_vignette.R
 0177b3b71daf60e2470b9f162d185405 *inst/doc/corto_vignette.Rmd
-e159012d9729c69e168f1e524ad2b25d *inst/doc/corto_vignette.html
+6fc40622beac923cd7e61eba010c290b *inst/doc/corto_vignette.html
 b4a8f4af7142e96af0f1d7bb06478fa7 *inst/extdata/centroids.rda
 8af8bb6500ce7d1e6696f4ad784326ca *inst/extdata/cnvmat.rda
 d758ba2b4619f9e0dd12835ce501081a *inst/extdata/inmat.rda
