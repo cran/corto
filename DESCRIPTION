@@ -1,7 +1,7 @@
 Package: corto
 Type: Package
 Title: Inference of Gene Regulatory Networks
-Version: 1.0.8
+Version: 1.1.0
 Authors@R: c(
  person("Federico M.","Giorgi",email = "federico.giorgi@gmail.com",role=c("aut","cre")),
  person("Daniele","Mercatelli",email = "danielemercatelli@gmail.com",role="ctb"),
@@ -22,15 +22,15 @@ Description: We present 'corto' (Correlation Tool), a simple package to infer
 License: LGPL-3
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Depends: R (>= 3.6)
 NeedsCompilation: no
 Imports: dplyr, knitr, parallel, pbapply, plotrix, rmarkdown, stats,
         utils
 VignetteBuilder: knitr
-Packaged: 2020-04-09 09:41:10 UTC; Utente
+Packaged: 2020-06-27 00:48:16 UTC; Utente
 Author: Federico M. Giorgi [aut, cre],
   Daniele Mercatelli [ctb],
   Gonzalo Lopez-Garcia [ctb]
 Repository: CRAN
-Date/Publication: 2020-04-09 11:40:03 UTC
+Date/Publication: 2020-06-27 04:30:03 UTC
