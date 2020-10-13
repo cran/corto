@@ -5,7 +5,9 @@
 #' @param expmat1 A numeric expression matrix, with genes/features as rows and samples as columns.
 #' If only expmat1 is provided (without expmat2), the function will perform a sample-by-sample
 #' master regulator analysis, with the mean of the dataset as a reference. If expmat2 is provided,
-#' expmat1 will be considered the "treatment" sample set.
+#' expmat1 will be considered the "treatment" sample set. If a named vector is provided, with names
+#' as genes/features and values as signature values (e.g. T-test statistics), signature
+#' master regulator analysis is performed.
 #' @param expmat2 A numeric expression matrix, with genes/features as rows and samples as columns.
 #' If provided, it will be considered as the "control" or "reference" sample set for expmat1.
 #' @param regulon A _regulon_ object, output of the _corto_ function.
@@ -32,6 +34,7 @@
 #' @export
 mra<-function(expmat1,expmat2=NULL,regulon,minsize=10,nperm=NULL,nthreads=2,verbose=FALSE,
               atacseq=NULL){
+
     # Setting default nperm if not set by the user
     if(is.null(nperm)){
         if(is.null(expmat2)){
@@ -55,6 +58,12 @@ mra<-function(expmat1,expmat2=NULL,regulon,minsize=10,nperm=NULL,nthreads=2,verb
         vec<-sign(regulon[[centroid]]$tfmode)*regulon[[centroid]]$likelihood
         netmat[centroid,names(vec)]<-vec
     }
+
+    # Case 0: expmat1 is a signature
+    if(is.vector(expmat1)){
+        stop("Input data is provided as vector, Calculating Signature Master Regulator Analysis")
+    }
+
 
     # Case 1: expmat2 is provided as control
     if(!is.null(expmat2)){
@@ -231,9 +240,10 @@ mra<-function(expmat1,expmat2=NULL,regulon,minsize=10,nperm=NULL,nthreads=2,verb
 #' @param mrs Either a numeric value indicating how many MRs to show, sorted by
 #' significance, or a character vector specifying which TFs to show. Default is 5
 #' @param title Title of the plot (optional, default is "corto - Master Regulator Analysis")
+#' @param pthr The p-value at which the MR is considered significant. Default is 0.01
 #' @return A plot is generated
 #' @export
-mraplot<-function(mraobj,mrs=5,title="corto - Master Regulator Analysis"){
+mraplot<-function(mraobj,mrs=5,title="corto - Master Regulator Analysis",pthr=0.01){
     # Checks ----
     if(is.numeric(mrs)){
         mrs<-names(sort(abs(mraobj$nes),decreasing=TRUE))[1:mrs]
@@ -297,15 +307,15 @@ mraplot<-function(mraobj,mrs=5,title="corto - Master Regulator Analysis"){
 
         ### NES ----
         bgcol<-"white"
-        if(mraobj$nes[mr]>0&mraobj$pvalue[mr]<=0.01){
+        if(mraobj$nes[mr]>0&mraobj$pvalue[mr]<=pthr){
             bgcol<-"salmon"
-        } else if(mraobj$nes[mr]<0&mraobj$pvalue[mr]<=0.01){
+        } else if(mraobj$nes[mr]<0&mraobj$pvalue[mr]<=pthr){
             bgcol<-"cornflowerblue"
         }
         titplot(paste0("NES=",round(mraobj$nes[mr],2)),bgcol=bgcol)
         ### p-value ----
         bold<-FALSE
-        if(mraobj$pvalue[mr]<=0.01){bold<-TRUE}
+        if(mraobj$pvalue[mr]<=pthr){bold<-TRUE}
         titplot(paste0("p=",signif(mraobj$pvalue[mr],3)),bold=bold)
 
         ### Network ----
@@ -396,7 +406,7 @@ mraplot<-function(mraobj,mrs=5,title="corto - Master Regulator Analysis"){
 
         ### Signature ----
         # Define Transparency for barcode plot coloring
-        if(mraobj$nes[mr]>0&mraobj$pvalue[mr]<=0.01){
+        if(mraobj$nes[mr]>0&mraobj$pvalue[mr]<=pthr){
             transp<-255*(ranksig^3)/(length(ranksig)^3)
             transp<-as.hexmode(round(transp))
             transp<-format(transp,width=2)
@@ -405,7 +415,7 @@ mraplot<-function(mraobj,mrs=5,title="corto - Master Regulator Analysis"){
             transpinv<-as.hexmode(round(transpinv))
             transpinv<-format(transpinv,width=2)
             names(transpinv)<-names(ranksig)
-        } else if(mraobj$nes[mr]<0&mraobj$pvalue[mr]<=0.01){
+        } else if(mraobj$nes[mr]<0&mraobj$pvalue[mr]<=pthr){
             transp<-255*(ranksiginv^3)/(length(ranksiginv)^3)
             transp<-as.hexmode(round(transp))
             transp<-format(transp,width=2)
