@@ -303,7 +303,8 @@ mraplot<-function(mraobj,mrs=5,title="corto - Master Regulator Analysis",pthr=0.
     # Fill the plot with MR blocks ----
     for(mr in mrs){
         # Name of the MR
-        titplot(mr,cex=4)
+        mycex<-16*1/nchar(mr)
+        titplot(mr,cex=mycex)
 
         ### NES ----
         bgcol<-"white"

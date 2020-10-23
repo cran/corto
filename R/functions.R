@@ -262,6 +262,7 @@ kmgformat <- function(input, roundParam = 1) {
 #' in order to show a colored background. Default is 0.01.
 #' @param showLine a boolean indicating if a linear regression line should be plotted. Default is
 #' TRUE
+#' @param grid a boolean indicating whether to show a plot grid. Default is TRUE
 #' @param pch the _pch_ parameter indicating the points shape. Default is 20
 #' @param subtitle NULL by default, in which case the function will print as a subtitle the correlation
 #' coefficient (CC) and its pvalue. Otherwise, a user-provided string, bypassing the predefined subtitle
@@ -278,7 +279,7 @@ kmgformat <- function(input, roundParam = 1) {
 #' y<-setNames(rnorm(210),paste0("var",11:220))
 #' scatter(x,y,xlab="Variable x",ylab="Variable y",main="Scatter plot by corto package")
 #' @export
-scatter<-function(x,y,method="pearson",threshold=0.01,showLine=TRUE,bgcol=FALSE,pch=20,
+scatter<-function(x,y,method="pearson",threshold=0.01,showLine=TRUE,grid=TRUE,bgcol=FALSE,pch=20,
                   subtitle=NULL,extendXlim=FALSE,...){
   common<-intersect(names(x),names(y))
   x<-x[common]
@@ -301,7 +302,9 @@ scatter<-function(x,y,method="pearson",threshold=0.01,showLine=TRUE,bgcol=FALSE,
     if(ccp>threshold){bgcol<-"#FFFFFF00"}
     rect(par("usr")[1], par("usr")[3], par("usr")[2], par("usr")[4],col=bgcol)
   }
-  grid(col="gray10")
+  if(grid){
+      grid(col="gray10")
+  }
   if(showLine){
     lm1<-lm(y~x)
     abline(lm1$coef)
