@@ -1,6 +1,6 @@
-12e591e9e63e41233a64df70add4f8dd *DESCRIPTION
+17575f558e564557b2d90760e3c8f185 *DESCRIPTION
 511433a919f033bc9b88ccc70cab9daa *NAMESPACE
-e0286c10dead9d9a7beb486dcee9fadc *R/corto.R
+9bc9c32544a9230b4b725322a5f68127 *R/corto.R
 da948b664911bf9a4d27bf67066a3d99 *R/functions.R
 7bd43fc62fd636b6f87cda8f5fa18386 *R/gsea.R
 83b7c77683c95876902afd9124cff32a *R/mra.R
@@ -9,11 +9,11 @@ da948b664911bf9a4d27bf67066a3d99 *R/functions.R
 b655af289b5096385311bfe249ecc21f *inst/CITATION
 0220fddf68b9eeb0e02e9258b6cae34e *inst/doc/corto_vignette.R
 0177b3b71daf60e2470b9f162d185405 *inst/doc/corto_vignette.Rmd
-5bf5a56feda67855ec71e90c0e560f2b *inst/doc/corto_vignette.html
+1635697bf5e29f68751d4447920635f7 *inst/doc/corto_vignette.html
 b4a8f4af7142e96af0f1d7bb06478fa7 *inst/extdata/centroids.rda
 8af8bb6500ce7d1e6696f4ad784326ca *inst/extdata/cnvmat.rda
 d758ba2b4619f9e0dd12835ce501081a *inst/extdata/inmat.rda
-591b9f9745589604bff6d041d140b175 *man/corto.Rd
+db54291f32d7ad07f5654c1121075e5e *man/corto.Rd
 e304218d44c047d65af906b365503d53 *man/fcor.Rd
 dea46ae748614f1f3df795d6c11b6ed7 *man/fisherp.Rd
 282f3e782d568bab4d3cdec0e40fe7a1 *man/gsea.Rd
