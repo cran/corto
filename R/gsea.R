@@ -137,6 +137,9 @@ gsea <- function(reflist,
     # Calculate the normalized enrichment score
     nes<-p2z(p.value)*sign(es)
 
+    # Filter leading edge for only genes in set
+    ledge_names<-intersect(set,ledge_names)
+
     gsea.obj<-list(
         es=es,
         nes=nes,
