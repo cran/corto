@@ -202,6 +202,8 @@ null_gsea<-function(set,reflist,w=1,np=1000){
 #' @param bottomYlabel String for the Y label of the bottom plot
 #' @param bottomTitle String for the title of the bottom part of the plot
 #' @param ext_nes Provide a NES from an external calculation
+#' @param ext_es Provide an ES from an external calculation
+#' @param ext_pvalue Provide a pvalue from an external calculation
 #' @param omit_middle If TRUE, will not plot the running score
 #' (FALSE by default)
 #' @return Nothing, a plot is generated in the default output device
@@ -217,7 +219,8 @@ plot_gsea <- function(gsea.obj, twoColors = c("red",
                       title = "Running Enrichment Score",
                       bottomTitle = "List Values",
                       bottomYlabel = "Signature values",
-                      ext_nes = NULL, omit_middle = FALSE) {
+                      ext_nes = NULL, ext_pvalue = NULL, ext_es =NULL,
+                      omit_middle = FALSE) {
     # Keep original par device settings and layout
     on.exit(layout(1))
     opar<-par(no.readonly=TRUE)
@@ -336,25 +339,25 @@ plot_gsea <- function(gsea.obj, twoColors = c("red",
             legend_position <- "bottomleft"
         }
 
-        # If an external NES is not provided, the
+        # If external NES/ES/pvalue are not provided, the
         # standard GSEA one is shown
         if (is.null(ext_nes)) {
-            legend(legend_position,
-                   legend = c(paste("ES = ",
-                                    signif(es, 3), sep = ""),
-                              paste("NES = ", signif(nes,
-                                                     3), sep = ""),
-                              paste("p-value = ",
-                                    signif(p.value, 3), sep = "")),
-                   bg = "white")
-        } else {
-            legend(legend_position,
-                   legend = c(paste("NES = ",
-                                    signif(ext_nes, 3), sep = ""),
-                              paste("p-value = ",
-                                    signif(z2p(ext_nes),
-                                           3), sep = "")), bg = "white")
-        }
+            toshow_nes<-signif(nes,3)
+        }else{toshow_nes<-ext_nes}
+        if (is.null(ext_es)) {
+            toshow_es<-signif(es,3)
+        }else{toshow_es<-ext_es}
+        if (is.null(ext_pvalue)) {
+            toshow_pvalue<-signif(p.value,3)
+        }else{toshow_pvalue<-ext_pvalue}
+
+
+        legend(legend_position,
+               legend = c(paste0("ES = ",toshow_es),
+                          paste0("NES = ",toshow_nes),
+                          paste0("p-value = ",toshow_pvalue)
+               ),
+               bg = "white")
     }
 
 
@@ -376,26 +379,25 @@ plot_gsea <- function(gsea.obj, twoColors = c("red",
           lwd = 1, lty = 1, cex = 1, col = 1)
 
     if (omit_middle) {
-        # If an external NES is not provided, the
+        # If external NES/ES/pvalue are not provided, the
         # standard GSEA one is shown
         if (is.null(ext_nes)) {
-            legend("top",
-                   legend = c(paste("ES = ",
-                                    signif(es, 3), sep = ""),
-                              paste("NES = ",
-                                    signif(nes,
-                                           3), sep = ""),
-                              paste("p-value = ",
-                                    signif(p.value, 3), sep = "")),
-                   bg = "white")
-        } else {
-            legend("top",
-                   legend = c(paste("NES = ",
-                                    signif(ext_nes, 3), sep = ""),
-                              paste("p-value = ", signif(z2p(ext_nes),
-                                                         3), sep = "")),
-                   bg = "white")
-        }
+            toshow_nes<-signif(nes,3)
+        }else{toshow_nes<-ext_nes}
+        if (is.null(ext_es)) {
+            toshow_es<-signif(es,3)
+        }else{toshow_es<-ext_es}
+        if (is.null(ext_pvalue)) {
+            toshow_pvalue<-signif(p.value,3)
+        }else{toshow_pvalue<-ext_pvalue}
+
+
+        legend(legend_position,
+               legend = c(paste0("ES = ",toshow_es),
+                          paste0("NES = ",toshow_nes),
+                          paste0("p-value = ",toshow_pvalue)
+               ),
+               bg = "white")
     }
 }
 
