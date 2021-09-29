@@ -236,8 +236,7 @@ plot_gsea <- function(gsea.obj, twoColors = c("red",
     reflist <- gsea.obj$reflist
     inSet <- gsea.obj$inSet
 
-    # Define plot borders? Who wrote the
-    # original code has a non-euclidean mind
+    # Define plot borders
     min.RES <- min(running_score)
     max.RES <- max(running_score)
     delta <- (max.RES - min.RES) * 0.5
@@ -245,15 +244,15 @@ plot_gsea <- function(gsea.obj, twoColors = c("red",
     max.plot <- max.RES
     max.corr <- max(reflist)
     min.corr <- min(reflist)
-    corr0.line <- (-min.corr/(max.corr -
-                                  min.corr)) * 1.25 * delta + min.plot
+    corr0.line <- (-min.corr/(max.corr - min.corr)) * 1.25 * delta + min.plot
 
-    if (es < 0) {
-        l.ledge.ref.plot <- length(reflist) -
-            length(ledge)
-    } else {
-        l.ledge.ref.plot <- length(ledge)
-    }
+
+
+    # if (es < 0) {
+    #     l.ledge.ref.plot <- length(reflist) - length(ledge)
+    # } else {
+    #     l.ledge.ref.plot <- length(ledge)
+    # }
 
     # Define colors (red is positive nes,
     # blue is negative nes)
@@ -329,6 +328,8 @@ plot_gsea <- function(gsea.obj, twoColors = c("red",
         # This is also important: it's the max
         # enrichment vertical line (aka LEADING
         # EDGE)
+        l.ledge.ref.plot<-which.max(abs(running_score))
+
         lines(c(l.ledge.ref.plot, l.ledge.ref.plot),
               c(min.plot, max.plot), lwd = 1,
               lty = 1, cex = 1)
