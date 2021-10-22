@@ -1,15 +1,15 @@
-3ee8139bc4bbc205babc41db12aab410 *DESCRIPTION
+f223436272b31a4e0608e6f5b2745291 *DESCRIPTION
 511433a919f033bc9b88ccc70cab9daa *NAMESPACE
 9bc9c32544a9230b4b725322a5f68127 *R/corto.R
 da948b664911bf9a4d27bf67066a3d99 *R/functions.R
 f80cf4e32277ca874ca04d101ce51394 *R/gsea.R
 83b7c77683c95876902afd9124cff32a *R/mra.R
-033b1e10780e97eab36dfbefbfa94922 *README.md
+ef883fd7ebd29986db80d502761e41fc *README.md
 4a447137ce25c298145e2e59a7f8c8d2 *build/vignette.rds
 b655af289b5096385311bfe249ecc21f *inst/CITATION
 0220fddf68b9eeb0e02e9258b6cae34e *inst/doc/corto_vignette.R
-0177b3b71daf60e2470b9f162d185405 *inst/doc/corto_vignette.Rmd
-a54dfb4be26245ce233aa95bf8aeee51 *inst/doc/corto_vignette.html
+e3b64bac616e73356dc4882ba3719f7a *inst/doc/corto_vignette.Rmd
+ba43b5299e9750684f6584b55f187ad5 *inst/doc/corto_vignette.html
 b4a8f4af7142e96af0f1d7bb06478fa7 *inst/extdata/centroids.rda
 8af8bb6500ce7d1e6696f4ad784326ca *inst/extdata/cnvmat.rda
 d758ba2b4619f9e0dd12835ce501081a *inst/extdata/inmat.rda
@@ -33,4 +33,4 @@ bbccc9f050fa5c65c4a86371b1e27e52 *man/stouffer.Rd
 a0f2e1095cea5fbdde5afed53b40e822 *man/val2col.Rd
 8bb8781fca6972b5ba6a98da5fc338c9 *man/wstouffer.Rd
 6195d26b4ba2903644d15e0475953527 *man/z2p.Rd
-0177b3b71daf60e2470b9f162d185405 *vignettes/corto_vignette.Rmd
+e3b64bac616e73356dc4882ba3719f7a *vignettes/corto_vignette.Rmd

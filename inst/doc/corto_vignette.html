@@ -167,24 +167,24 @@ pre code {
 <h4 class="author"><div class="line-block">Daniele Mercatelli<sup>1</sup>, Gonzalo Lopez-Garcia<sup>2</sup>, Federico M. Giorgi<sup>1</sup><br />
 <sup>1</sup>Department of Pharmacy and Biotechnology, University of Bologna, Italy<br />
 <sup>2</sup>Department of Genetics and Genomic Sciences, Icahn School of Medicine at Mount Sinai, USA</div></h4>
-<h4 class="date">29 September, 2021</h4>
+<h4 class="date">22 October, 2021</h4>
 
 </div>
 
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>The <em>corto</em> (“correlation tool”) package provides a pipeline to infer networks between “centroid” and “target” variables in a dataset, using a combination of Spearman correlation and Data Processing Inequality (DPI), first proposed in [1]. The main application of <em>corto</em> is in the field of Bioinformatics and Transcriptomics, where co-occurrence between variables can be used as a mean to infer regulatory mechanisms [2] or gene functions [3]. In this field, usually the tested features are genes (or rather, their expression profile across samples), whereas the centroids are Transcription Factors (TFs) and their targets are Target Genes (TGs). The TF-TG co-expression can hint at a causal regulatory relationship, as proven in many studies [4,5,6]. The <em>corto</em> tool replicates the well-established pipeline of the ARACNe family of tools [7,8,9]</p>
+<p>The <em>corto</em> (“correlation tool”) package provides a pipeline to infer networks between “centroid” and “target” variables in a dataset, using a combination of Pearson correlation and Data Processing Inequality (DPI), first proposed in [1]. The main application of <em>corto</em> is in the field of Bioinformatics and Transcriptomics, where co-occurrence between variables can be used as a mean to infer regulatory mechanisms [2] or gene functions [3]. In this field, usually the tested features are genes (or rather, their expression profile across samples), whereas the centroids are Transcription Factors (TFs) and their targets are Target Genes (TGs). The TF-TG co-expression can hint at a causal regulatory relationship, as proven in many studies [4,5,6]. The <em>corto</em> tool replicates the well-established pipeline of the ARACNe family of tools [7,8,9]</p>
 <p>In brief, <em>corto</em> operates using the following steps:</p>
 <ol style="list-style-type: decimal">
 <li>Load a gene expression matrix and a list of user-provided centroids (e.g. TFs). Data should be normalized via Variance Stabilizing Transformation (VST) for RNA-Seq, and Robust Multiarray Average (RMA) for microarrays, as described in [10].</li>
-<li>Calculate all pairwise Spearman correlation coefficients between centroid and target features. The rank transformation operated by the Spearman correlation coefficient is a common procedure used in co-expression based studies, due to its benefits in reducing the effects of outliers [11].</li>
+<li>Calculate all pairwise Pearson correlation coefficients between centroid and target features. The rank transformation operated by the Pearson correlation coefficient is a common procedure used in co-expression based studies, due to its benefits in reducing the effects of outliers [11].</li>
 <li>Filter out all centroid-target features whose correlation coefficient <em>absolute value</em> is below the provided p-value threshold <em>p</em>.</li>
 <li>Apply DPI to all centroid-centroid-target triplets, in order to identify which centroid-target correlation is stronger and identify the most likely association (e.g. which TF is the most likely regulator of the TG in the dataset).</li>
 <li>All edges are tested for Data Processing Inequality in a number of bootstrapped versions of the same input matrix (specified by the <em>nbootstraps</em> parameter, 100 by default, as in ARACNE-AP [8]). This step can be run in parallel by specifiying the number of threads using the <em>nthreads</em> parameter. The number of occurrences of each edge (if they survived DPI) is calculated. This number can range from 0 (the edge is not significant in any bootstrap) to <em>nbootstraps</em>+1 (the edge is significant in all bootstraps, and also in the original matrix).</li>
 <li>A network is generated in the form of a list, where each element is a centroid-based list of targets. In order to follow the structure of the <em>regulon</em> class implemented by downstream analysis packages (e.g. VIPER [12]), each target is characterized by two parameters:
 <ul>
-<li>The <em>tfmode</em>, the mode of action, i.e. the Spearman correlation coefficient between the target and the centroid in the original input matrix</li>
+<li>The <em>tfmode</em>, the mode of action, i.e. the Pearson correlation coefficient between the target and the centroid in the original input matrix</li>
 <li>The <em>likelihood</em> of the interaction, calculated as the number of bootstraps in which the edge survives DPI, divided by the total number of bootstraps (in this impelmentation, the presence of an edge in the original, non-bootstrapped matrix is considered as an additional evidence)</li>
 </ul></li>
 </ol>
