@@ -303,7 +303,7 @@ scatter<-function(x,y,method="pearson",threshold=0.01,showLine=TRUE,grid=TRUE,bg
     rect(par("usr")[1], par("usr")[3], par("usr")[2], par("usr")[4],col=bgcol)
   }
   if(grid){
-      grid(col="gray10")
+    grid(col="gray10")
   }
   if(showLine){
     lm1<-lm(y~x)
@@ -461,3 +461,29 @@ val2col <- function(z, col1 = "navy", col2 = "white",
   }
   return(colorlevels)
 }
+
+
+#' barplot2 - Bar plot with error bars
+#' @param values A matrix of values
+#' @param errors A matrix of values for upper error bar
+#' @param ... Arguments to be passed to the core _barplot_ function
+#' @return A plot
+#' @examples
+#' values<-matrix(rnorm(10*4,mean=10),nrow=4,ncol=10)
+#' errors<-matrix(runif(10*4),nrow=4,ncol=10)
+#' colnames(values)<-colnames(errors)<-LETTERS[1:10]
+#' barplot2(values,errors,main="Bar plot with error bars")
+#' @export
+barplot2<-function(values,errors,...){
+  sums<-values+errors
+  bp<-barplot(values,beside=TRUE,ylim=c(0,1.1*max(sums)),...)
+  for(i in 1:nrow(bp)){
+    for(j in 1:ncol(bp)){
+      pos<-bp[i,j]
+      m<-values[i,j]
+      s<-errors[i,j]
+      arrows(pos,m+s,pos,m,angle=90,code=3,lwd=2,length=0.06)
+    }
+  }
+}
+
