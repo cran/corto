@@ -625,6 +625,12 @@ gsea2 <- function (reflist, set1,set2, method = c("permutation", "pareto"),
 #' @param bottomTitle String for the title of the bottom part of the plot
 #' @param bottomYlabel String for the Y label of the bottom plot
 #' (FALSE by default)
+#' @param legside1 String specifying the position of the first NES legend,
+#' for example "topright", "bottomleft". Default is NULL, letting the function
+#' automatically place it
+#' @param legside2 String specifying the position of the second NES legend,
+#' for example "topright", "bottomleft". Default is NULL, letting the function
+#' automatically place it
 #' @return Nothing, a plot is generated in the default output device
 #' @examples
 #' reflist<-setNames(-sort(rnorm(1000)),paste0('gene',1:1000))
@@ -637,7 +643,8 @@ plot_gsea2 <- function (gsea.obj, twoColors = c("red", "blue"),
                         plotNames = FALSE,
                         title = "Running Enrichment Score",
                         bottomTitle = "List Values",
-                        bottomYlabel = "Signature values") {
+                        bottomYlabel = "Signature values",
+                        legside1=NULL,legside2=NULL) {
     # Keep original par device settings and layout
     on.exit(layout(1))
     opar<-par(no.readonly=TRUE)
@@ -709,13 +716,19 @@ plot_gsea2 <- function (gsea.obj, twoColors = c("red", "blue"),
                                                      max(running_score1)), lwd = 1, lty = 1, cex = 1)
     lines(c(l.ledge.ref.plot2, l.ledge.ref.plot2), c(min(running_score2),
                                                      max(running_score2)), lwd = 1, lty = 1, cex = 1)
-    if(es1 >=0){legside1="topright"
-    }else{legside1="topleft"}
+
+    if(is.null(legside1)){
+        if(es1 >=0){legside1="topright"
+        }else{legside1="topleft"}
+    }
     legend(legside1, legend = c(paste("NES1 = ", signif(nes1, 3), sep = ""),
                                 paste("P1 = ", sprintf("%.2e",p.value1), sep = "")),
            bg = "white",box.col=twoColors[1],cex=1.5)
-    if(es2 >=0){legside2="bottomright"
-    }else{legside2="bottomleft"}
+
+    if(is.null(legside2)){
+        if(es2 >=0){legside2="bottomright"
+        }else{legside2="bottomleft"}
+    }
     legend(legside2, legend = c(paste("NES2 = ", signif(nes2, 3), sep = ""),
                                 paste("P2 = ", sprintf("%.2e",p.value2), sep = "")),
            bg = "white",box.col=twoColors[2],cex=1.5)

@@ -10,7 +10,9 @@ plot_gsea2(
   plotNames = FALSE,
   title = "Running Enrichment Score",
   bottomTitle = "List Values",
-  bottomYlabel = "Signature values"
+  bottomYlabel = "Signature values",
+  legside1 = NULL,
+  legside2 = NULL
 )
 }
 \arguments{
@@ -27,6 +29,14 @@ enrichment scores, and of the barcodes}
 
 \item{bottomYlabel}{String for the Y label of the bottom plot
 (FALSE by default)}
+
+\item{legside1}{String specifying the position of the first NES legend,
+for example "topright", "bottomleft". Default is NULL, letting the function
+automatically place it}
+
+\item{legside2}{String specifying the position of the second NES legend,
+for example "topright", "bottomleft". Default is NULL, letting the function
+automatically place it}
 }
 \value{
 Nothing, a plot is generated in the default output device

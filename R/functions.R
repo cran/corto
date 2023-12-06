@@ -295,7 +295,9 @@ scatter<-function(x,y,method="pearson",threshold=0.01,showLine=TRUE,grid=TRUE,bg
     ccp<-signif(cc$p.value,3)
     cccor<-signif(cc$estimate,3)
     if(is.null(subtitle)){
-        if(ccp<0.01){
+        if(ccp==0 | ccp >= 0.01){
+            bq<-paste0("CC=",cccor," (p=",ccp,")")
+        } else {
             vv<-format(ccp,scientific=TRUE)
             v1<-gsub("e.+","",vv)
             v2<-gsub(".+e","",vv)
@@ -303,8 +305,6 @@ scatter<-function(x,y,method="pearson",threshold=0.01,showLine=TRUE,grid=TRUE,bg
             v2<-gsub("\\+0","+",v2)
             v2<-gsub("\\++","",v2)
             bq<-as.expression(bquote("CC="~.(cccor)~" (p="~.(v1)~x~10^.(v2)~")"))
-        } else{
-            bq<-mtext(paste0("CC=",cccor," (p=",ccp,")"),cex=0.7)
         }
         mtext(bq,cex=0.7)
     } else {
@@ -521,6 +521,8 @@ val2col <- function(z, col1 = "navy", col2 = "white",
 #' barplot2 - Bar plot with upper error bars
 #' @param values A matrix of values
 #' @param errors A matrix of values for upper error bar
+#' @param lower Boolean, whether the lower error bar should be plotted, default FALSE
+#' @param flat Boolean, whether the head of bars should be flat, default TRUE
 #' @param ... Arguments to be passed to the core _barplot_ function
 #' @return A plot
 #' @examples
@@ -529,21 +531,34 @@ val2col <- function(z, col1 = "navy", col2 = "white",
 #' colnames(values)<-colnames(errors)<-LETTERS[1:10]
 #' barplot2(values,errors,main="Bar plot with error bars")
 #' @export
-barplot2<-function(values,errors,...){
+barplot2<-function(values,errors,lower=FALSE,flat=TRUE,...){
     if(!is.matrix(values)&!is.matrix(errors)){
         values<-t(as.matrix(values))
         errors<-t(as.matrix(errors))
     }
     sums<-values+errors
     bp<-barplot(values,beside=TRUE,ylim=c(0,1.1*max(sums)),...)
+    if(flat){angle<-90}else{angle<-0}
     for(i in 1:nrow(bp)){
         for(j in 1:ncol(bp)){
             pos<-bp[i,j]
             m<-values[i,j]
             s<-errors[i,j]
-            arrows(pos,m+s,pos,m,angle=90,code=1,lwd=2,length=0.06)
+            arrows(pos,m+s,pos,m,angle=angle,code=1,lwd=2,length=0.06)
         }
     }
+
+    if(lower){
+        for(i in 1:nrow(bp)){
+            for(j in 1:ncol(bp)){
+                pos<-bp[i,j]
+                m<-values[i,j]
+                s<-errors[i,j]
+                arrows(pos,m-s,pos,m,angle=angle,code=1,lwd=2,length=0.06)
+            }
+        }
+    }
+    return(bp)
 }
 
 # Function boxOverlap (needed for textrepel)
