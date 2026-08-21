@@ -27,8 +27,7 @@ enrichment scores, and of the barcodes}
 
 \item{bottomTitle}{String for the title of the bottom part of the plot}
 
-\item{bottomYlabel}{String for the Y label of the bottom plot
-(FALSE by default)}
+\item{bottomYlabel}{String for the Y label of the bottom plot}
 
 \item{legside1}{String specifying the position of the first NES legend,
 for example "topright", "bottomleft". Default is NULL, letting the function

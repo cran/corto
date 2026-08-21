@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 )
 
 ## ----install, eval=FALSE------------------------------------------------------
-#  install.packages("corto")
+# install.packages("corto")
 
 ## ----load---------------------------------------------------------------------
 library(corto)
@@ -26,14 +26,14 @@ length(centroids)
 
 ## ----runcorto,message=FALSE,results="hide"------------------------------------
 regulon<-corto(inmat,centroids=centroids,nbootstraps=10,p=1e-30,nthreads=2)
-# Input Matrix has 87 samples and 10021 features
+# Input Matrix has 87 samples and 7000 features
 # Correlation Coefficient Threshold is: 0.889962633618839
-# Removed 112 features with zero variance
+# Removed 64 features with zero variance
 # Calculating pairwise correlations
 # Initial testing of triplets for DPI
-# 246 edges passed the initial threshold
-# Building DPI network from 37 centroids and 136 targets
-# Running 100 bootstraps with 2 thread(s)
+# 115 edges passed the initial threshold
+# Building DPI network from 30 centroids and 76 targets
+# Running 10 bootstraps with 2 thread(s)
 # Calculating edge likelihood
 # Generating regulon object
 
@@ -47,6 +47,6 @@ length(regulon)
 names(regulon)
 
 ## ----runcnv, eval=FALSE-------------------------------------------------------
-#  load(system.file("extdata","cnvmat.rda",package="corto",mustWork=TRUE))
-#  regulon <- corto(inmat,centroids=centroids,nthreads=2,nbootstraps=10,verbose=TRUE,cnvmat=cnvmat,p=0.01)
+# load(system.file("extdata","cnvmat.rda",package="corto",mustWork=TRUE))
+# regulon <- corto(inmat,centroids=centroids,nthreads=2,nbootstraps=10,verbose=TRUE,cnvmat=cnvmat,p=0.01)
 
