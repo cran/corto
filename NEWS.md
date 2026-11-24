@@ -1,3 +1,22 @@
+# corto 1.4.1
+
+* Documented default of `mra(nthreads=)` corrected to 2.
+* `mraplot()` draws its down/up arrows as lines rather than Unicode characters,
+  which were missing from PDF output on Windows.
+* Software name 'ARACNe' quoted in the package description.
+* The vignette now matches the README: same introduction and algorithm
+  steps, a section on `mra()` and `mraplot()`, and the same corrected
+  references, numbered in order of citation.
+* All references in the README and the vignette now carry a DOI where one
+  exists, with complete page numbers for the corto paper and consistent
+  journal names. VIPER and the TCGA mesothelioma dataset are now cited by
+  their journal articles instead of the Bioconductor vignette and a meeting
+  abstract.
+* `citation("corto")` now includes journal, volume, pages and DOI in its
+  text version.
+* DESCRIPTION gains `URL` and `BugReports` fields.
+* The README shows the current CRAN and GitHub versions at the top.
+
 # corto 1.4.0
 
 ## New features

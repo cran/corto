@@ -1,4 +1,4 @@
-#' Perform Master Regulator Analysis (mra).
+#' Perform Master Regulator Analysis (mra)
 #'
 #' The analysis is performed between two groups of samples in the form of expression matrices,
 #' with genes/features as rows and samples as columns.
@@ -15,7 +15,7 @@
 #' @param nperm The number of times the input data will be permuted to generate null signatures.
 #' Default is 1000 if expmat2 or a signature vector is provided, and 10 if only expmat1 is
 #' provided (single sample mra).
-#' @param nthreads The number of threads to use for generating null signatures. Default is 1
+#' @param nthreads The number of threads to use for generating null signatures. Default is 2
 #' @param atacseq An optional 3 column matrix derived from an ATAC-Seq analysis, indicating
 #' 1) gene symbol, 2) -log10(FDR)*sing(log2FC) of an ATAC-Seq design, 3) distance from TSS.
 #' If provided, the output will contain an _atacseq_ field.
@@ -536,9 +536,12 @@ mraplot<-function(mraobj,mrs=5,title="corto - Master Regulator Analysis",pthr=0.
 
         # text(0,0.5,labels="-",pos=4,cex=12,font=1)
         # text(length(ranksig),0.5,labels="+",pos=2,cex=10,font=1)
-        uparrow<-intToUtf8(8593)
-        dnarrow<-intToUtf8(8595)
-        text(length(ranksig)/2,0.5,labels=paste0(dnarrow,"   ",uparrow),pos=NULL,cex=5,font=2)
+        # Down and up arrows in the middle, drawn rather than typed so that
+        # they do not depend on the fonts of the graphics device
+        mid<-length(ranksig)/2
+        gap<-0.075*length(ranksig)
+        arrows(mid-gap,0.85,mid-gap,0.12,lwd=4,length=0.16,angle=35)
+        arrows(mid+gap,0.12,mid+gap,0.85,lwd=4,length=0.16,angle=35)
         par(mar=opar)
 
         ### Keep blank to separate from the next MR
